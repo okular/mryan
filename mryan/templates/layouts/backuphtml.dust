@@ -1,0 +1,50 @@
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+		<section>
+			<div class="left">
+  
+			  <h1>Mark Ryan Satt</h1>
+			  <span>Designer / Developer</span>
+			  <div class="animation-container col-lg-12">
+				<div class="animation-center">
+					<svg width="100%" height="200px" style="width:100%;">
+					  <path class="tri1" d="M11.7 118L9.719 118 72.5 9.259 135.281 118z"></path>
+					  <path class="tri2" d="M12.1 118L9.719 118 54.602 40.259 99.486 118z"></path>
+					  <path class="tri3" d="M48.7 118L46.496 118 72.991 72.11 99.486 118z"></path>
+					</svg>
+	        	</div>
+	        </div>
+			</div>
+			  
+			<div class="right">
+			  
+			  <article>
+			  
+			  <h1>White Bear Yacht Club</h1>
+			  <img src="<?php bloginfo('template_url');?>/images/work-37.jpg" style="width:100%;" />
+			  <p>
+			    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+			  </p>
+			    
+			  <p>
+			    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+			  </p>
+			    
+			  </article>
+			  
+			    <article>
+			  
+			  <h1>This is a post title</h1>
+			  <p>
+			    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+			  </p>
+			    
+			  <p>
+			    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+			  </p>
+			    
+			  </article>
+			  
+			</div>
+		</section>
+
+	</article><!-- #post-## -->

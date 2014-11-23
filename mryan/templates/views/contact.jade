@@ -1,0 +1,67 @@
+extends ../layouts/default
+
+//- block intro
+//- 	.container
+//- 		h1 Contact Us
+
+block left
+	.container: .row
+		.left.col-lg-3
+			.animation-container
+				| <svg width="100%" height="200px" style="width:100%;">
+				|  <path class="tri1" d="M11.7 118L9.719 118 72.5 9.259 135.281 118z"></path>
+				|  <path class="tri2" d="M12.1 118L9.719 118 54.602 40.259 99.486 118z"></path>
+				|  <path class="tri3" d="M48.7 118L46.496 118 72.991 72.11 99.486 118z"></path>
+				|</svg>
+			h1 Mark Ryan Satt
+			span Designer / Developer
+			div(role="navigation").navbar.navbar-default
+				.container-fluid
+					.navbar-header
+						button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+							span.sr-only Toggle navigation
+							span.icon-bar
+							span.icon-bar
+							span.icon-bar
+						//- a.navbar-brand(href='/') Mark Ryan Satt
+					.collapse.navbar-collapse
+						ul.nav.navbar-nav.navbar-left
+							each link in navLinks
+								li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
+						ul.nav.navbar-nav
+							if user
+								if user.canAccessKeystone
+									li: a(href='/keystone') Open Keystone
+								li: a(href='/keystone/signout') Sign Out
+							else
+								li: a(href='/keystone/signin') Sign In
+		
+		block content
+		.right.col-lg-9
+			.col-sm-8.col-lg-12
+				if enquirySubmitted
+					h3 Thanks for getting in touch.
+				else
+					.row: .col-sm-8.col-md-6
+						form(method='post')
+							input(type='hidden', name='action', value='contact')
+							.form-group(class=validationErrors.name ? 'has-error' : null)
+								label Name
+								input(type='text', name='name.full', value=formData['name.full']).form-control
+							.form-group(class=validationErrors.email ? 'has-error' : null)
+								label Email
+								input(type='email', name='email', value=formData.email).form-control
+							.form-group
+								label Phone
+								input(type='text', name='phone', value=formData.phone, placeholder='(optional)').form-control
+							.form-group(class=validationErrors.enquiryType ? 'has-error' : null)
+								label What are you contacting us about?
+								select(name='enquiryType').form-control
+									option(value='') (select one)
+									each type in enquiryTypes
+										option(value=type.value, selected=formData.enquiryType == type.value)= type.label
+							.form-group(class=validationErrors.message ? 'has-error' : null)
+								label Message
+								textarea(name='message', placeholder='Leave us a message...' rows=4).form-control= formData.message
+							.form-actions
+								button(type='submit').btn.btn-primary Send

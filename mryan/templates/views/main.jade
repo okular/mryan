@@ -1,0 +1,107 @@
+extends ../layouts/default
+
+mixin post(post)
+	.col-lg-4
+		.col-sm-12.col-xs-12.col-lg-12.post(data-ks-editable=editable(user, { list: 'Post', id: post.id }))
+				//- p.lead.text-muted Posted 
+				//- 	if post.publishedDate
+				//- 		| on #{post._.publishedDate.format('MMMM Do, YYYY')} 
+				//- 	if post.categories && post.categories.length
+				//- 		| in 
+				//- 		each cat, i in post.categories
+				//- 			a(href='/blog/' + cat.key)= cat.name
+				//- 			if i < post.categories.length - 1
+				//- 				| , 
+				//- 			else
+				//- 				|  
+					if post.author
+						| by #{post.author.name.first}
+			if post.image.exists
+				.mask-slide
+					img(src=post._.image.fit()).img
+					.content
+						.top-bar
+						h2: a(href='/blog/post/' + post.slug)= post.title
+						//- h1= post.content.brief
+				//- p!= post.content.brief
+				//- if post.content.extended
+				//- 	p.read-more: a(href='/blog/post/' + post.slug) Read more...
+
+block left
+	.left
+		.left-container.col-lg-6
+			.animation-container
+				| <svg width="100%" height="200px" style="width:100%;">
+				|  <path class="tri1" d="M11.7 118L9.719 118 72.5 9.259 135.281 118z"></path>
+				|  <path class="tri2" d="M12.1 118L9.719 118 54.602 40.259 99.486 118z"></path>
+				|  <path class="tri3" d="M48.7 118L46.496 118 72.991 72.11 99.486 118z"></path>
+				|</svg>
+			h1 Mark Ryan Satt
+			span Designer &amp; Developer
+			div(role="navigation").navbar.navbar-default
+				.container-fluid
+					.navbar-header
+						button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+							span.sr-only Toggle navigation
+							span.icon-bar
+							span.icon-bar
+							span.icon-bar
+						//- a.navbar-brand(href='/') Mark Ryan Satt
+					.collapse.navbar-collapse
+						ul.nav.navbar-nav.navbar-left
+							each link in navLinks
+								li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
+							if user
+								if user.canAccessKeystone
+									li: a(href='/keystone') Open Keystone
+								li: a(href='/keystone/signout') Sign Out
+							else
+								li: a(href='/keystone/signin') Sign In
+block content
+	.container: .row
+		.right.col-lg-12
+			.col-sm-12.col-lg-12
+				if filters.category && !data.category
+					h3.text-muted Invalid Category.
+				else
+					if data.posts.results.length
+						if data.posts.totalPages > 1
+							h4.text-weight-normal Showing 
+								strong #{data.posts.first}
+								|  to 
+								strong #{data.posts.last}
+								|  of 
+								strong #{data.posts.total}
+								|  posts.
+						else
+							h4.text-weight-normal Showing #{utils.plural(data.posts.results.length, '* post')}.
+						.blog
+							each post in data.posts.results
+								+post(post)
+						
+						if data.posts.totalPages > 1
+							ul.pagination
+								if data.posts.previous
+									li: a(href='?page=' + data.posts.previous): span.entypo.entypo-chevron-thin-left
+								else
+									li.disabled: a(href='?page=' + 1): span.entypo.entypo-chevron-thin-left
+								each p, i in data.posts.pages
+									li(class=data.posts.currentPage == p ? 'active' : null)
+										a(href='?page=' + (p == '...' ? (i ? data.posts.totalPages : 1) : p ))= p
+								if data.posts.next
+									li: a(href='?page=' + data.posts.next): span.entypo.entypo-chevron-thin-right
+								else
+									li.disabled: a(href='?page=' + data.posts.totalPages): span.entypo.entypo-chevron-thin-right
+					else
+						if data.category
+							h3.text-muted There are no posts in the category #{data.category.name}.
+						else
+							h3.text-muted There are no posts yet.
+		
+		if data.categories.length
+			.col-sm-4.col-md-3
+				h2 Categories
+				.list-group(style='margin-top: 70px;')
+					a(href='/blog', class=!data.category ? 'active' : false).list-group-item All Categories
+					each cat in data.categories
+						a(href='/blog/' + cat.key, class=data.category && data.category.id == cat.id ? 'active' : false).list-group-item= cat.name
